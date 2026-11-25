@@ -1,7 +1,7 @@
 import { SEATING } from "../data/tonight.js";
 
 function BookingList({ bookings }) {
-  const guests = bookings.reduce((total, booking) => total + booking.partySize, 0);
+  const guests = bookings.reduce((total, booking) => Number(total) + Number(booking.partySize), 0);
 
   return (
     <section className="panel bookings">

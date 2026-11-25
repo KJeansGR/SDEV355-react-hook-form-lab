@@ -1,31 +1,42 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 import { TIMES } from "../data/tonight.js";
 import RenderBadge from "./RenderBadge.jsx";
 
 function BookingForm({ onBook }) {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [partySize, setPartySize] = useState("");
-  const [time, setTime] = useState("");
-  const [notes, setNotes] = useState("");
+  const {register, handleSubmit, reset} = useForm();
+  // const [name, setName] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [partySize, setPartySize] = useState("");
+  // const [time, setTime] = useState("");
+  // const [notes, setNotes] = useState("");
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const booking = {
-      id: crypto.randomUUID(),
-      name,
-      phone,
-      partySize: Number(partySize),
-      time,
-      notes,
-    };
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   const booking = {
+  //     id: crypto.randomUUID(),
+  //     name,
+  //     phone,
+  //     partySize: Number(partySize),
+  //     time,
+  //     notes,
+  //   };
+  //   onBook(booking);
+  //   setName("");
+  //   setPhone("");
+  //   setPartySize("");
+  //   setTime("");
+  //   setNotes("");
+  // }
+  function saveBooking(data){
+
+    console.log(JSON.stringify(data, null, 2));
+
+    const booking = {id: crypto.randomUUID(), ...data}
+
     onBook(booking);
-    setName("");
-    setPhone("");
-    setPartySize("");
-    setTime("");
-    setNotes("");
+    reset();
   }
 
   return (
@@ -34,14 +45,13 @@ function BookingForm({ onBook }) {
         <h2 className="panel-title">Book a table</h2>
         <RenderBadge />
       </div>
-      <form className="booking-form" onSubmit={handleSubmit}>
+      <form className="booking-form" onSubmit={handleSubmit(saveBooking)}>
         <div className="field">
           <label className="field-label" htmlFor="name">Name</label>
           <input
             id="name"
             className="input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            {...register("name")}
           />
         </div>
 
@@ -51,8 +61,8 @@ function BookingForm({ onBook }) {
             id="phone"
             className="input"
             type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            // value={phone}
+            {...register("phone")}
           />
         </div>
 
@@ -65,8 +75,21 @@ function BookingForm({ onBook }) {
               type="number"
               min="1"
               max="12"
-              value={partySize}
-              onChange={(e) => setPartySize(e.target.value)}
+              // value={partySize}
+              {...register("partySize")}
+            />
+          </div>
+
+          <div className="field">
+            <label className="field-label" htmlFor="partySize">Seating</label>
+            <input
+              id="partySize"
+              className="input"
+              type="number"
+              min="1"
+              max="12"
+              // value={partySize}
+              {...register("partySize")}
             />
           </div>
 
@@ -75,8 +98,8 @@ function BookingForm({ onBook }) {
             <select
               id="time"
               className="input"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
+              // value={time}
+              {...register("time")}
             >
               <option value="">Choose a time</option>
               {TIMES.map((t) => (
@@ -94,8 +117,8 @@ function BookingForm({ onBook }) {
             id="notes"
             className="input"
             rows="3"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
+            // value={notes}
+            {...register("notes")}
           />
         </div>
 
