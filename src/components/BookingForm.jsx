@@ -79,20 +79,6 @@ function BookingForm({ onBook }) {
               {...register("partySize")}
             />
           </div>
-
-          <div className="field">
-            <label className="field-label" htmlFor="partySize">Seating</label>
-            <input
-              id="partySize"
-              className="input"
-              type="number"
-              min="1"
-              max="12"
-              // value={partySize}
-              {...register("partySize")}
-            />
-          </div>
-
           <div className="field">
             <label className="field-label" htmlFor="time">Time</label>
             <select
@@ -109,6 +95,31 @@ function BookingForm({ onBook }) {
               ))}
             </select>
           </div>
+
+          
+          <div className="field">
+            <span className="field-label">Seating</span>
+            <div className="choices">
+              <label  className="choice">
+                <input type="radio" value="indoor" {...register("seating")}/>
+                  Indoor
+              </label>
+              <label  className="choice">
+                <input type="radio" value="Patio" {...register("seating")}/>
+                  Patio
+              </label>
+              <label  className="choice">
+                <input type="radio" value="Bar" {...register("seating")}/>
+                  Bar
+              </label>
+            </div>
+            
+            <label  className="choice">
+            <input id="celebrating" type="checkbox" value="Bar" {...register("celebrating")}/>
+              celebrating something
+          </label>
+          </div>
+
         </div>
 
         <div className="field">

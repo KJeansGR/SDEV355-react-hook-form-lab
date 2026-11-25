@@ -17,7 +17,7 @@ function BookingList({ bookings }) {
             <div className="booking-top">
               <span className="booking-time">{booking.time}</span>
               <span className="booking-name">{booking.name}</span>
-              <span className="booking-party">Party of {booking.partySize}</span>
+              <span className="booking-party">Party of {booking.partySize || 0}</span>
             </div>
             <div className="booking-details">
               <span>{booking.phone}</span>
