@@ -62,10 +62,18 @@ function BookingForm({ onBook }) {
             className="input"
             type="tel"
             // value={phone}
-            {...register("phone")}
+            {...register("contact.phone")}
           />
         </div>
-
+        <div className="field">
+          <label className="field-label" htmlFor="email">Email</label>
+          <input
+            id="email"
+            className="input"
+            type="email"
+            {...register("contact.email")}
+          />
+        </div>
         <div className="field-row">
           <div className="field">
             <label className="field-label" htmlFor="partySize">Party size</label>
@@ -113,7 +121,7 @@ function BookingForm({ onBook }) {
                   Bar
               </label>
             </div>
-            
+
             <label  className="choice">
             <input id="celebrating" type="checkbox" value="Bar" {...register("celebrating")}/>
               celebrating something
